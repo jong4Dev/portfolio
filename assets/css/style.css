@@ -22,37 +22,14 @@
     overflow-x: hidden;
 }
 
-.crt-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: 
-        linear-gradient(rgba(18, 16, 16, 0.1) 50%, rgba(0, 0, 0, 0.25) 50%),
-        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-    background-size: 100% 2px, 3px 100%;
-    pointer-events: none;
-    z-index: 9999;
-}
-
-.scanlines {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        to bottom,
-        transparent 95%,
-        rgba(0, 255, 255, 0.1) 96%,
-        rgba(0, 255, 255, 0.1) 97%,
-        transparent 98%
-    );
-    background-size: 100% 5px;
-    animation: scanline 8s linear infinite;
-    pointer-events: none;
-    z-index: 9998;
+@media (max-width: 768px) {
+    .crt-overlay {
+        background-size: 100% 3px, 2px 100%;
+    }
+    
+    .scanlines {
+        background-size: 100% 8px;
+    }
 }
 
 @keyframes scanline {
@@ -606,17 +583,42 @@
     text-decoration: underline;
 }
 
-/* Responsive Design */
+/* Responsive Breakpoints */
+@media (max-width: 1200px) {
+    .retro-main {
+        padding: 2rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .hero-text h1 {
+        font-size: 2rem;
+    }
+    
+    .typewriter {
+        font-size: 2.5rem;
+    }
+    
+    .retro-hero {
+        gap: 2rem;
+    }
+}
+
+/* Tablet Size */
 @media (max-width: 768px) {
+    .retro-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .retro-nav ul {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
     .retro-hero {
         flex-direction: column;
-    }
-    
-    .about-grid, .contact-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .hero-text, .hero-image {
         text-align: center;
     }
     
@@ -624,8 +626,153 @@
         justify-content: center;
     }
     
+    .about-grid, 
+    .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .floppy-disk {
+        margin: 0 auto;
+    }
+    
+    .project-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+}
+
+/* Mobile Size */
+@media (max-width: 576px) {
+    .retro-nav ul {
+        gap: 0.5rem;
+    }
+    
+    .retro-nav a {
+        font-size: 0.7rem;
+        padding: 0.3rem;
+    }
+    
+    .hero-text h1 {
+        font-size: 1.5rem;
+    }
+    
+    .typewriter {
+        font-size: 2rem;
+    }
+    
+    .retro-subtitle {
+        font-size: 1.2rem;
+    }
+    
+    .retro-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .retro-button {
+        width: 100%;
+        text-align: center;
+    }
+    
+    .terminal-body {
+        padding: 1rem;
+        font-size: 1rem;
+    }
+    
+    .retro-timeline {
+        padding-left: 30px;
+    }
+    
+    .event-year {
+        left: -35px;
+        width: 30px;
+        height: 30px;
+        font-size: 0.7rem;
+    }
+    
     .project-filters {
-        flex-wrap: wrap;
+        flex-direction: column;
+    }
+    
+    .retro-form input, 
+    .retro-form textarea {
+        font-size: 1rem;
+    }
+}
+
+/* Small Mobile */
+@media (max-width: 400px) {
+    .pixel-text {
+        font-size: 0.8rem;
+    }
+    
+    .typewriter {
+        font-size: 1.5rem;
+    }
+    
+    .retro-subtitle {
+        font-size: 1rem;
+    }
+    
+    .project-card {
+        min-width: 100%;
+    }
+    
+    .terminal-title {
+        font-size: 1rem;
+    }
+}
+
+.mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    cursor: pointer;
+}
+
+.mobile-menu-toggle span {
+    display: block;
+    height: 3px;
+    width: 100%;
+    background-color: var(--retro-green);
+    transition: all 0.3s;
+}
+
+@media (max-width: 768px) {
+    .mobile-menu-toggle {
+        display: flex;
+    }
+    
+    .retro-nav {
+        display: none;
+        width: 100%;
+    }
+    
+    .retro-nav.active {
+        display: block;
+    }
+    
+    .retro-nav ul {
+        flex-direction: column;
+        padding: 1rem 0;
+    }
+}
+
+html {
+    font-size: 16px;
+}
+
+@media (max-width: 768px) {
+    html {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 576px) {
+    html {
+        font-size: 12px;
     }
 }
 

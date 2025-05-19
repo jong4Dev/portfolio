@@ -98,3 +98,12 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
+
+// Mobile menu toggle
+const menuToggle = document.querySelector('.mobile-menu-toggle');
+const nav = document.querySelector('.retro-nav');
+
+menuToggle.addEventListener('click', () => {
+    nav.classList.toggle('active');
+    menuToggle.classList.toggle('active');
+});
