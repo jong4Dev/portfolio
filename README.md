@@ -1,1 +1,1 @@
-https://fauzan-adit.wuaze.com/index.php
+fauzan-adit.wuaze.com
