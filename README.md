@@ -1,1 +1,1 @@
-fauzan-adit.wuaze.com
+https://fauzan-adit.wuaze.com/
