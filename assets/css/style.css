@@ -1,0 +1,636 @@
+/* Retro Color Palette */
+:root {
+    --retro-pink: #ff00ff;
+    --retro-blue: #00ffff;
+    --retro-green: #00ff00;
+    --retro-yellow: #ffff00;
+    --retro-purple: #9900ff;
+    --retro-black: #000000;
+    --retro-dark: #1a1a1a;
+    --retro-gray: #333333;
+    --retro-light: #cccccc;
+    --retro-white: #ffffff;
+}
+
+/* CRT Screen Effect */
+.retro-body {
+    background-color: var(--retro-black);
+    color: var(--retro-light);
+    font-family: 'VT323', monospace;
+    line-height: 1.6;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.crt-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(rgba(18, 16, 16, 0.1) 50%, rgba(0, 0, 0, 0.25) 50%),
+        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    background-size: 100% 2px, 3px 100%;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+.scanlines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        transparent 95%,
+        rgba(0, 255, 255, 0.1) 96%,
+        rgba(0, 255, 255, 0.1) 97%,
+        transparent 98%
+    );
+    background-size: 100% 5px;
+    animation: scanline 8s linear infinite;
+    pointer-events: none;
+    z-index: 9998;
+}
+
+@keyframes scanline {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 100%; }
+}
+
+/* Typography */
+.pixel-text {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.9rem;
+    color: var(--retro-green);
+    text-shadow: 0 0 5px var(--retro-green);
+}
+
+.typewriter {
+    font-family: 'VT323', monospace;
+    font-size: 3rem;
+    color: var(--retro-pink);
+    text-shadow: 0 0 10px var(--retro-pink);
+    overflow: hidden;
+    border-right: 3px solid var(--retro-pink);
+    white-space: nowrap;
+    margin: 0 auto;
+    letter-spacing: 0.15em;
+    animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: var(--retro-pink); }
+}
+
+.blinking-cursor {
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+    from, to { opacity: 1 }
+    50% { opacity: 0 }
+}
+
+/* Layout Components */
+.retro-header {
+    background-color: var(--retro-dark);
+    padding: 1rem;
+    border-bottom: 3px solid var(--retro-purple);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.retro-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.retro-nav ul {
+    display: flex;
+    list-style: none;
+    gap: 1.5rem;
+}
+
+.retro-nav a {
+    color: var(--retro-light);
+    text-decoration: none;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.8rem;
+    padding: 0.5rem;
+    position: relative;
+}
+
+.retro-nav a:hover {
+    color: var(--retro-blue);
+}
+
+.retro-nav a.active {
+    color: var(--retro-pink);
+}
+
+.retro-nav a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--retro-pink);
+    animation: underline-glow 1.5s infinite alternate;
+}
+
+@keyframes underline-glow {
+    from { box-shadow: 0 0 5px var(--retro-pink); }
+    to { box-shadow: 0 0 20px var(--retro-pink); }
+}
+
+.retro-main {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.retro-footer {
+    background-color: var(--retro-dark);
+    padding: 2rem;
+    margin-top: 3rem;
+    border-top: 3px solid var(--retro-purple);
+}
+
+/* Buttons */
+.retro-button {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    background-color: var(--retro-purple);
+    color: var(--retro-white);
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.8rem;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+    text-transform: uppercase;
+}
+
+.retro-button:hover {
+    background-color: var(--retro-pink);
+    box-shadow: 0 0 10px var(--retro-pink);
+    transform: translateY(-2px);
+}
+
+.retro-button:active {
+    transform: translateY(0);
+}
+
+.retro-button.alt {
+    background-color: transparent;
+    border: 2px solid var(--retro-purple);
+    color: var(--retro-purple);
+}
+
+.retro-button.alt:hover {
+    background-color: var(--retro-purple);
+    color: var(--retro-white);
+}
+
+.retro-button.small {
+    padding: 0.5rem 1rem;
+    font-size: 0.7rem;
+}
+
+/* Terminal Styles */
+.retro-terminal {
+    background-color: var(--retro-dark);
+    border: 3px solid var(--retro-purple);
+    border-radius: 5px;
+    box-shadow: 0 0 15px rgba(153, 0, 255, 0.5);
+    overflow: hidden;
+}
+
+.terminal-header {
+    background-color: var(--retro-gray);
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.terminal-button {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.terminal-button.red { background-color: #ff5f56; }
+.terminal-button.yellow { background-color: #ffbd2e; }
+.terminal-button.green { background-color: #27c93f; }
+
+.terminal-title {
+    margin-left: 1rem;
+    font-family: 'VT323', monospace;
+    font-size: 1.2rem;
+    color: var(--retro-light);
+}
+
+.terminal-body {
+    padding: 1.5rem;
+    font-family: 'VT323', monospace;
+    font-size: 1.2rem;
+    line-height: 1.6;
+}
+
+.terminal-body p {
+    margin: 0.5rem 0;
+    color: var(--retro-green);
+}
+
+/* Homepage Specific Styles */
+.retro-hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3rem;
+    margin-bottom: 4rem;
+}
+
+.hero-text {
+    flex: 1;
+}
+
+.hero-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.pixel-image {
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+    max-width: 300px;
+    border: 5px solid var(--retro-purple);
+    box-shadow: 0 0 20px var(--retro-purple);
+}
+
+.pixel-container {
+    position: relative;
+}
+
+.pixel-container::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    border: 2px solid var(--retro-green);
+    z-index: -1;
+    opacity: 0.7;
+}
+
+.highlight {
+    color: var(--retro-yellow);
+    text-shadow: 0 0 10px var(--retro-yellow);
+}
+
+.retro-subtitle {
+    font-size: 1.5rem;
+    color: var(--retro-blue);
+    margin: 1.5rem 0;
+    text-shadow: 0 0 5px var(--retro-blue);
+}
+
+.retro-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+/* Skills Section */
+.retro-skills {
+    margin: 4rem 0;
+}
+
+.section-title {
+    margin-bottom: 2rem;
+    color: var(--retro-blue);
+}
+
+.skill-bar {
+    margin-bottom: 1.5rem;
+}
+
+.skill-name {
+    margin-bottom: 0.5rem;
+}
+
+.skill-container {
+    width: 100%;
+    background-color: var(--retro-gray);
+    border: 2px solid var(--retro-purple);
+    position: relative;
+    height: 30px;
+}
+
+.skill-progress {
+    height: 100%;
+    position: relative;
+    transition: width 1.5s ease-in-out;
+}
+
+.skill-percent {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--retro-white);
+    font-family: 'VT323', monospace;
+    font-size: 1.2rem;
+}
+
+/* About Page Styles */
+.about-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 3rem;
+    margin: 2rem 0;
+}
+
+.about-terminal {
+    margin-top: 2rem;
+}
+
+.floppy-disk {
+    width: 200px;
+    height: 200px;
+    background-color: var(--retro-dark);
+    border: 5px solid var(--retro-gray);
+    position: relative;
+    transform: rotate(10deg);
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+.floppy-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 30px;
+    background-color: var(--retro-gray);
+}
+
+.floppy-label {
+    position: absolute;
+    top: 40px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    background-color: var(--retro-purple);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 1rem;
+}
+
+/* Timeline */
+.retro-timeline {
+    position: relative;
+    margin: 3rem 0;
+    padding-left: 50px;
+}
+
+.retro-timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 20px;
+    height: 100%;
+    width: 4px;
+    background-color: var(--retro-purple);
+    box-shadow: 0 0 10px var(--retro-purple);
+}
+
+.timeline-event {
+    position: relative;
+    margin-bottom: 2rem;
+    padding-left: 30px;
+}
+
+.event-year {
+    position: absolute;
+    left: -50px;
+    top: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--retro-purple);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 10px var(--retro-purple);
+}
+
+.event-desc {
+    background-color: var(--retro-dark);
+    padding: 1rem;
+    border: 1px solid var(--retro-purple);
+    box-shadow: 0 0 10px rgba(153, 0, 255, 0.3);
+}
+
+/* Projects Page */
+.project-filters {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.project-card {
+    background-color: var(--retro-dark);
+    border: 2px solid var(--retro-gray);
+    transition: all 0.3s;
+    overflow: hidden;
+}
+
+.project-card:hover {
+    border-color: var(--retro-purple);
+    box-shadow: 0 0 20px var(--retro-purple);
+    transform: translateY(-5px);
+}
+
+.project-image {
+    position: relative;
+    overflow: hidden;
+}
+
+.project-image img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+
+.project-card:hover .project-image img {
+    transform: scale(1.1);
+}
+
+.project-year {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: var(--retro-purple);
+    padding: 0.3rem 0.6rem;
+}
+
+.project-info {
+    padding: 1.5rem;
+}
+
+.project-info h3 {
+    margin-bottom: 0.5rem;
+    color: var(--retro-pink);
+}
+
+.project-info p {
+    margin-bottom: 1rem;
+    color: var(--retro-light);
+}
+
+.project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.project-tags span {
+    background-color: var(--retro-gray);
+    padding: 0.2rem 0.5rem;
+    font-size: 0.7rem;
+}
+
+/* Contact Page */
+.retro-alert {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    background-color: var(--retro-dark);
+    border: 2px solid var(--retro-green);
+}
+
+.retro-alert.success {
+    border-color: var(--retro-green);
+}
+
+.retro-alert .alert-icon {
+    font-size: 1.5rem;
+    color: var(--retro-green);
+}
+
+.retro-alert .alert-text {
+    font-family: 'VT323', monospace;
+    font-size: 1.2rem;
+    color: var(--retro-green);
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+}
+
+.retro-form .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.retro-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.retro-input, .retro-textarea {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: var(--retro-dark);
+    border: 2px solid var(--retro-gray);
+    color: var(--retro-light);
+    font-family: 'VT323', monospace;
+    font-size: 1.2rem;
+}
+
+.retro-input:focus, .retro-textarea:focus {
+    outline: none;
+    border-color: var(--retro-purple);
+    box-shadow: 0 0 10px var(--retro-purple);
+}
+
+.retro-textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.social-links a {
+    color: var(--retro-blue);
+    text-decoration: none;
+}
+
+.social-links a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .retro-hero {
+        flex-direction: column;
+    }
+    
+    .about-grid, .contact-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .hero-text, .hero-image {
+        text-align: center;
+    }
+    
+    .retro-buttons {
+        justify-content: center;
+    }
+    
+    .project-filters {
+        flex-wrap: wrap;
+    }
+}
+
+/* Animation for terminal text */
+@keyframes typing-effect {
+    from { width: 0 }
+    to { width: 100% }
+}
